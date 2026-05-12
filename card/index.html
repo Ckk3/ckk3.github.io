@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Luis Gustavo Mota — Ccard</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+	<meta name="description" content="Digital business card for Luis Gustavo Mota — scan to save my contact.">
+	<meta name="theme-color" content="#000000">
+	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+	<link href="https://fonts.googleapis.com/css?family=Space+Mono:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<main class="card-stage">
+		<section class="card" aria-label="Business card">
+			<div class="card__frame" aria-hidden="true"></div>
+
+			<div class="card__content">
+				<img class="card__photo"
+					src="/images/ckk-profile-pic.png"
+					alt="Luis Gustavo Mota"
+					width="110" height="110">
+
+				<h1 class="card__name">LUIS GUSTAVO MOTA</h1>
+
+				<div class="card__qr-wrap">
+					<div class="card__qr" id="qrcode" aria-label="QR code — scan to save contact"></div>
+				</div>
+
+				<p class="card__url">www.ckk3.dev</p>
+			</div>
+		</section>
+
+		<a class="card-back" href="/" aria-label="Back to site">
+			<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<line x1="19" y1="12" x2="5" y2="12"/>
+				<polyline points="12 19 5 12 12 5"/>
+			</svg>
+		</a>
+
+		<button class="flip-toggle" type="button" aria-label="Flip card view">
+			<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<polyline points="23 4 23 10 17 10"/>
+				<polyline points="1 20 1 14 7 14"/>
+				<path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/>
+				<path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/>
+			</svg>
+		</button>
+	</main>
+
+	<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+	<script>
+		(function () {
+			var vcard = [
+				'BEGIN:VCARD',
+				'VERSION:3.0',
+				'FN:Luis Gustavo Mota',
+				'N:Mota;Luis Gustavo;;;',
+				'TITLE:Software Developer',
+				'TEL;TYPE=CELL:+5599982478979',
+				'EMAIL:contato.gustavomota@gmail.com',
+				'URL:https://ckk3.dev',
+				'URL:https://github.com/Ckk3',
+				'URL:https://www.linkedin.com/in/luisgustavomota/',
+				'PHOTO;VALUE=URI:https://ckk3.dev/images/ckk-profile-pic.png',
+				'UID:luisgustavomota@ckk3.dev',
+				'END:VCARD'
+			].join('\r\n');
+
+			new QRCode(document.getElementById('qrcode'), {
+				text: vcard,
+				width: 200,
+				height: 200,
+				colorDark: '#0a0e12',
+				colorLight: '#f1ebde',
+				correctLevel: QRCode.CorrectLevel.L
+			});
+
+			var card = document.querySelector('.card');
+			var flipBtn = document.querySelector('.flip-toggle');
+			requestAnimationFrame(function () { card.classList.add('flipped'); });
+			flipBtn.addEventListener('click', function () { card.classList.toggle('flipped'); });
+		})();
+	</script>
+</body>
+</html>
